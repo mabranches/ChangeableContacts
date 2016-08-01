@@ -1,15 +1,20 @@
 class UsersController < ApplicationController
+  include UsersHelper
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_non_admin, only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.where.not(email: User::ADMIN_EMAIL ).all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    if !current_user.admin? && current_user.id != params[:id].to_i
+      redirect_to current_user
+    end
   end
 
   # GET /users/new
@@ -64,7 +69,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
