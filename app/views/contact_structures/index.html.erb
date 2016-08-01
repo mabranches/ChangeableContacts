@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contact Structures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Data type</th>
+      <th>Name</th>
+      <th>Extra</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contact_structures.each do |contact_structure| %>
+      <tr>
+        <td><%= contact_structure.user %></td>
+        <td><%= contact_structure.data_type %></td>
+        <td><%= contact_structure.name %></td>
+        <td><%= contact_structure.extra %></td>
+        <td><%= link_to 'Show', contact_structure %></td>
+        <td><%= link_to 'Edit', edit_contact_structure_path(contact_structure) %></td>
+        <td><%= link_to 'Destroy', contact_structure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contact Structure', new_contact_structure_path %>

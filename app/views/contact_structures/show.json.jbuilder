@@ -1,0 +1,1 @@
+json.partial! "contact_structures/contact_structure", contact_structure: @contact_structure
