@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801171210) do
+ActiveRecord::Schema.define(version: 20160801180030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contact_structures", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "data_type_id"
+    t.string   "name"
+    t.jsonb    "extra"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["data_type_id"], name: "index_contact_structures_on_data_type_id", using: :btree
+    t.index ["user_id"], name: "index_contact_structures_on_user_id", using: :btree
+  end
 
   create_table "data_types", force: :cascade do |t|
     t.string   "name"
@@ -31,4 +42,6 @@ ActiveRecord::Schema.define(version: 20160801171210) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "contact_structures", "data_types"
+  add_foreign_key "contact_structures", "users"
 end
