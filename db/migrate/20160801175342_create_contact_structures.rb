@@ -5,6 +5,7 @@ class CreateContactStructures < ActiveRecord::Migration[5.0]
       t.references :data_type, foreign_key: true
       t.string :name
       t.jsonb :extra
+      t.integer :lock_version
 
       t.timestamps
     end
