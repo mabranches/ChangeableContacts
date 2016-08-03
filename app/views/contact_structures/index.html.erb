@@ -2,7 +2,7 @@
 
 <h1>Contact Structures</h1>
 
-<table>
+<table class='table'>
   <thead>
     <tr>
       <th>User</th>
@@ -16,10 +16,10 @@
   <tbody>
     <% @contact_structures.each do |contact_structure| %>
       <tr>
-        <td><%= contact_structure.user %></td>
-        <td><%= contact_structure.data_type %></td>
+        <td><%= contact_structure.user.name %></td>
+        <td><%= contact_structure.data_type.name %></td>
         <td><%= contact_structure.name %></td>
-        <td><%= contact_structure.extra %></td>
+        <td><%= contact_structure.extra.join(',') if contact_structure.data_type.name == 'combo_box'%></td>
         <td><%= link_to 'Show', contact_structure %></td>
         <td><%= link_to 'Edit', edit_contact_structure_path(contact_structure) %></td>
         <td><%= link_to 'Destroy', contact_structure, method: :delete, data: { confirm: 'Are you sure?' } %></td>

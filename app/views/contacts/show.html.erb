@@ -10,15 +10,12 @@
   <%= @contact.email %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @contact.user %>
-</p>
-
-<p>
-  <strong>Extra:</strong>
-  <%= @contact.extra %>
-</p>
+  <%ContactStructure.all.each do |cs|%>
+    <p>
+      <strong><%=cs.name.capitalize%>:</strong>
+      <%= @contact.extra[cs.name] %>
+    </p>
+  <%end%>
 
 <%= link_to 'Edit', edit_contact_path(@contact) %> |
 <%= link_to 'Back', contacts_path %>

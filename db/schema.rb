@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160801192851) do
     t.integer  "lock_version"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["email"], name: "index_contacts_on_email", unique: true, using: :btree
     t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
   end
 

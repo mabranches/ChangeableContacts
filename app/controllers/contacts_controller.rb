@@ -15,6 +15,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+    @contact.extra = {}
   end
 
   # GET /contacts/1/edit
@@ -67,8 +68,10 @@ class ContactsController < ApplicationController
       @contact = Contact.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:name, :email, :user_id, :extra)
+      unknown_property_keys = params[:contact][:extra].try(:keys)
+      c_params = params.require(:contact).permit(:name, :email, :user_id, { extra: unknown_property_keys })
+      c_params[:user_id] = current_user.id
+      c_params
     end
 end

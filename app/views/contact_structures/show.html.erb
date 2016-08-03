@@ -2,23 +2,24 @@
 
 <p>
   <strong>User:</strong>
-  <%= @contact_structure.user %>
+  <%= @contact_structure.user.name %>
 </p>
 
 <p>
   <strong>Data type:</strong>
-  <%= @contact_structure.data_type %>
+  <%= @contact_structure.data_type.name %>
 </p>
 
 <p>
   <strong>Name:</strong>
   <%= @contact_structure.name %>
 </p>
-
+<%if @contact_structure.try(:data_type).try(:name) == 'combo_box'%>
 <p>
   <strong>Extra:</strong>
-  <%= @contact_structure.extra %>
+  <%= @contact_structure.extra.join(',') %>
 </p>
+<%end%>
 
 <%= link_to 'Edit', edit_contact_structure_path(@contact_structure) %> |
 <%= link_to 'Back', contact_structures_path %>

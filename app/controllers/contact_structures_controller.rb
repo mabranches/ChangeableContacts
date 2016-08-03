@@ -1,28 +1,21 @@
 class ContactStructuresController < ApplicationController
   before_action :set_contact_structure, only: [:show, :edit, :update, :destroy]
+  before_action :set_types, only: [:new, :edit, :create]
 
-  # GET /contact_structures
-  # GET /contact_structures.json
   def index
     @contact_structures = ContactStructure.all
   end
 
-  # GET /contact_structures/1
-  # GET /contact_structures/1.json
   def show
   end
 
-  # GET /contact_structures/new
   def new
     @contact_structure = ContactStructure.new
   end
 
-  # GET /contact_structures/1/edit
   def edit
   end
 
-  # POST /contact_structures
-  # POST /contact_structures.json
   def create
     @contact_structure = ContactStructure.new(contact_structure_params)
 
@@ -37,8 +30,6 @@ class ContactStructuresController < ApplicationController
     end
   end
 
-  # PATCH/PUT /contact_structures/1
-  # PATCH/PUT /contact_structures/1.json
   def update
     respond_to do |format|
       if @contact_structure.update(contact_structure_params)
@@ -51,8 +42,6 @@ class ContactStructuresController < ApplicationController
     end
   end
 
-  # DELETE /contact_structures/1
-  # DELETE /contact_structures/1.json
   def destroy
     @contact_structure.destroy
     respond_to do |format|
@@ -62,13 +51,20 @@ class ContactStructuresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_contact_structure
       @contact_structure = ContactStructure.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def contact_structure_params
-      params.require(:contact_structure).permit(:user_id, :data_type_id, :name, :extra)
+      cs_params = params.require(:contact_structure).permit(:user_id, :data_type_id, :name, :extra)
+      data_type = DataType.find(cs_params[:data_type_id])
+      cs_params[:extra] = cs_params[:extra].split(',')
+      cs_params[:user_id] = current_user.id
+      cs_params
     end
+
+    def set_types
+      @types = DataType.all
+    end
+
 end
