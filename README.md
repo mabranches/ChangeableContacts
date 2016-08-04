@@ -1,24 +1,22 @@
-# README
+# Changeable Contacts
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+### Heroku App
+* admin's login  
+  email: admin@email.com    
+  password: 1234
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* user's login  
+  email: user1@email.com    
+  password: 1234
+### Usage
+#### Admin
+  Can manage users
+#### Users
+  Can manage contact structure
+  Can manage contacts
+### Data Types
+ * text
+ * text_area
+ * combo_box  
+ Combo_box uses the extra field for options. Options must be comma ',' separated.
