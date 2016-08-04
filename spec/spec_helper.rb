@@ -1,0 +1,25 @@
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/spec/"
+end
+
+RSpec.configure do |config|
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
+end
+
+def user
+
+   User.find_by(name:'user') || User.create(
+     name:'user', email:'email@test.com',
+     password:'1234', password_confirmation:'1234')
+end
+
+def admin
+   user = User.find_by(name:'admin')
+end

@@ -24,27 +24,43 @@ RSpec.describe UsersController, type: :controller do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      name: 'user_t',
+      email:'user_t@test.com',
+      password:'123',
+      password_confirmation:'123'
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      name: 'user_t',
+      email: nil,
+      password:'123',
+      password_confirmation:'123'
+    }
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # UsersController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { {user_id: admin.id} }
 
   describe "GET #index" do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(assigns(:users)).to eq([user])
+      expect(assigns(:users)).to include(user)
     end
   end
 
   describe "GET #show" do
+    context 'normal user' do
+      let(:valid_session) { {user_id: user.id} }
+      it "redirect to @user if id is from other user" do
+      user = User.create! valid_attributes
+      get :show, params: {id: user.id + 1}, session: valid_session
+      expect(response).to have_http_status(:redirect)
+
+      end
+    end
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes
       get :show, params: {id: user.to_param}, session: valid_session
@@ -90,7 +106,8 @@ RSpec.describe UsersController, type: :controller do
     context "with invalid params" do
       it "assigns a newly created but unsaved user as @user" do
         post :create, params: {user: invalid_attributes}, session: valid_session
-        expect(assigns(:user)).to be_a_new(User)
+        expect(assigns(:user)).to be_a(User)
+        expect(assigns(:user).id).to be(nil)
       end
 
       it "re-renders the 'new' template" do
@@ -103,14 +120,14 @@ RSpec.describe UsersController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: 'new_name'}
       }
 
       it "updates the requested user" do
         user = User.create! valid_attributes
         put :update, params: {id: user.to_param, user: new_attributes}, session: valid_session
         user.reload
-        skip("Add assertions for updated state")
+        expect(user.name).to eq('new_name')
       end
 
       it "assigns the requested user as @user" do

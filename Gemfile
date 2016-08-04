@@ -30,12 +30,14 @@ gem "twitter-bootstrap-rails"
 # gem 'capistrano-rails', group: :development
 
 group :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'rspec-rails'
+  gem 'byebug', platform: :mri
+  gem "rails-controller-testing"#, :git => "https://github.com/rails/rails-controller-testing"
+  gem "rspec-rails"
+  gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'byebug', platform: :mri
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
