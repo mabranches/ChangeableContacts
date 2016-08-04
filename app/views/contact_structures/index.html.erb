@@ -5,7 +5,6 @@
 <table class='table'>
   <thead>
     <tr>
-      <th>User</th>
       <th>Data type</th>
       <th>Name</th>
       <th>Extra</th>
@@ -16,7 +15,6 @@
   <tbody>
     <% @contact_structures.each do |contact_structure| %>
       <tr>
-        <td><%= contact_structure.user.name %></td>
         <td><%= contact_structure.data_type.name %></td>
         <td><%= contact_structure.name %></td>
         <td><%= contact_structure.extra.join(',') if contact_structure.data_type.name == 'combo_box'%></td>

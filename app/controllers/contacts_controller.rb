@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  before_action :set_structures, only: [:edit, :new, :create, :update]
 
   # GET /contacts
   # GET /contacts.json
@@ -66,6 +67,10 @@ class ContactsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
       @contact = Contact.find(params[:id])
+    end
+
+    def set_structures
+      @contact_structures = ContactStructure.where(user_id: current_user.id)
     end
 
     def contact_params

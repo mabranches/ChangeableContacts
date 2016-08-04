@@ -1,6 +1,6 @@
 class ContactStructuresController < ApplicationController
   before_action :set_contact_structure, only: [:show, :edit, :update, :destroy]
-  before_action :set_types, only: [:new, :edit, :create]
+  before_action :set_types, only: [:new, :edit, :create, :update]
 
   def index
     @contact_structures = ContactStructure.all

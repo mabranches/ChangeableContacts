@@ -21,24 +21,11 @@
     <%= f.text_field :email %>
   </div>
 
-  <%
-      @contact_structures = ContactStructure.where(user_id: current_user.id)
-  %>
   <%= f.fields_for(:extra) do |ff|%>
     <%@contact_structures.each do |cs|%>
       <div class="form-group">
         <%= ff.label cs.name %>
-        <% if cs.data_type.name == 'text' %>
-            <%= ff.text_field cs.name, value: contact.extra[cs.name]%>
-        <%end%>
-        <% if cs.data_type.name == 'text_area' %>
-          <%= ff.text_area cs.name, value: contact.extra[cs.name]%>
-        <%end%>
-        <% if cs.data_type.name == 'combo_box' %>
-          <%= ff.select(cs.name, options_for_select(cs.extra.zip(cs.extra), contact.extra[cs.name])) %>
-        <%end%>
-      <%=# render "form_types/form_#{cs.type.name}", ff:ff, field: cs
-    %>
+        <%= render "form_types/#{cs.data_type.name}", contact: contact, ff:ff, cs: cs%>
       </div>
     <%end%>
   <%end%>
