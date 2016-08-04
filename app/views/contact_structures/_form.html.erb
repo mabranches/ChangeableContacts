@@ -24,7 +24,8 @@
 
   <div class="field">
     <%= f.label :extra %>
-    <%= f.text_field :extra %>
+    <%= f.text_field :extra, 'data-toggle': "tooltip",
+          title:"Values for combo_box. Should be separated by \",\"" %>
   </div>
 
   <div class="actions">

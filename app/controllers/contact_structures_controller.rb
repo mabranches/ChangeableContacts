@@ -55,15 +55,14 @@ class ContactStructuresController < ApplicationController
       @contact_structure = ContactStructure.find(params[:id])
     end
 
+    def set_types
+      @types = DataType.all
+    end
+
     def contact_structure_params
       cs_params = params.require(:contact_structure).permit(:user_id, :data_type_id, :name, :extra)
       cs_params[:extra] = cs_params[:extra].to_s.split(',')
       cs_params[:user_id] = current_user.id
       cs_params
     end
-
-    def set_types
-      @types = DataType.all
-    end
-
 end
