@@ -11,10 +11,10 @@
   password: 1234
 ### Usage
 #### Admin
-  Can manage users
+  * Can manage users
 #### Users
-  Can manage contact structure
-  Can manage contacts
+  * Can manage contact structure
+  * Can manage contacts
 ### Data Types
  * text
  * text_area
