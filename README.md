@@ -11,12 +11,14 @@
   password: 1234
 ### Usage
 #### Admin
-  * Can manage users
+  * Can manage users  
+
 #### Users
   * Can manage contact structure
   * Can manage contacts
+
 ### Data Types
- * text
- * text_area
- * combo_box  
+  * text
+  * text_area
+  * combo_box  
  Combo_box uses the extra field for options. Options must be comma ',' separated.
