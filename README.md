@@ -4,7 +4,7 @@ https://changeable-contacts.herokuapp.com
 
 * admin's login  
   email: admin@email.com    
-  password: 1234
+  password: admin
 
 * user's login  
   email: user1@email.com    
